@@ -22,4 +22,16 @@ RSpec.describe App do
     subject { app.privacy }
     it { is_expected.to eq privacy }
   end
+
+  describe "#convert_to_private!" do
+    subject(:convert_to_private!) { app.convert_to_private! }
+
+    context "when app is public" do
+      let(:privacy) { App::PUBLIC }
+
+      it "changes the privacy to private" do
+        expect { convert_to_private! } .to change { app.privacy }.to App::PRIVATE
+      end
+    end
+  end
 end

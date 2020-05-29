@@ -8,4 +8,8 @@ class App
     @owner = owner
     @privacy = privacy
   end
+
+  def convert_to_private!
+    @privacy = PRIVATE
+  end
 end
