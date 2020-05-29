@@ -9,4 +9,9 @@ RSpec.describe User do
     subject { user.plan }
     it { is_expected.to eq plan }
   end
+
+  describe "#limits" do
+    subject { user.limits }
+    it { is_expected.to eq limit_config }
+  end
 end
