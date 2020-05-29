@@ -1,7 +1,6 @@
 class App
   PUBLIC = :public
   PRIVATE = :private
-  DEFAULT_PUBLIC_LIMITS = LimitConfig.new(2, 45, nil, nil)
   attr_reader :owner, :privacy
 
   def initialize(owner, privacy)
@@ -16,8 +15,8 @@ class App
 
   def limits
     case privacy
-    when PRIVATE then owner.plan.limits
-    when PUBLIC then DEFAULT_PUBLIC_LIMITS
+      when PRIVATE then owner.plan.limits
+      when PUBLIC then LimitsRepository.fetch PUBLIC_APP_DEFAULTS
     end
   end
 end

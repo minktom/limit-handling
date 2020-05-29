@@ -47,9 +47,10 @@ RSpec.describe App do
 
     context "when app is public" do
       let(:privacy) { App::PUBLIC }
+      let(:public_app_default_limits) { LimitsRepository.fetch PUBLIC_APP_DEFAULTS }
 
       it "returns with the public app default limits" do
-        expect(limits).to eq App::DEFAULT_PUBLIC_LIMITS
+        expect(limits).to eq public_app_default_limits
       end
     end
   end
