@@ -3,8 +3,8 @@ require "spec_helper"
 RSpec.describe App do
   subject(:app) { described_class.new user, privacy }
   let(:user) { User.new plan }
-  let(:plan) { Plan.new "Some plan", limit_config }
-  let(:limit_config) { LimitConfig.new 2, 30, 200, 2 }
+  let(:plan) { Plan.new "Some plan", plan_limits }
+  let(:plan_limits) { LimitConfig.new 2, 30, 200, 2 }
   let(:privacy) { App::PRIVATE }
 
   describe ".new" do
@@ -31,6 +31,25 @@ RSpec.describe App do
 
       it "changes the privacy to private" do
         expect { convert_to_private! } .to change { app.privacy }.to App::PRIVATE
+      end
+    end
+  end
+
+  describe "#limits" do
+    subject(:limits) { app.limits }
+    context "when app is private" do
+      let(:privacy) { App::PRIVATE }
+
+      it "returns with the owners plan limits" do
+        expect(limits).to eq plan_limits
+      end
+    end
+
+    context "when app is public" do
+      let(:privacy) { App::PUBLIC }
+
+      it "returns with the public app default limits" do
+        expect(limits).to eq App::DEFAULT_PUBLIC_LIMITS
       end
     end
   end
