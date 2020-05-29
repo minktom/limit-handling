@@ -1,1 +1,2 @@
 require 'plan'
+require 'user'
