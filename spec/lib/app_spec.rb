@@ -3,7 +3,8 @@ require "spec_helper"
 RSpec.describe App do
   subject(:app) { described_class.new user, privacy }
   let(:user) { User.new plan }
-  let(:plan) { Plan.new "Some plan" }
+  let(:plan) { Plan.new "Some plan", limit_config }
+  let(:limit_config) { LimitConfig.new 2, 30, 200, 2 }
   let(:privacy) { App::PRIVATE }
 
   describe ".new" do

@@ -1,7 +1,8 @@
 class Plan
-  attr_reader :name
+  attr_reader :name, :limits
 
-  def initialize(name)
+  def initialize(name, limits)
     @name = name
+    @limits = limits
   end
 end
