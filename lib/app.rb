@@ -1,8 +1,11 @@
 class App
-  attr_reader :owner, :public
+  PUBLIC = :public
+  PRIVATE = :private
+  attr_reader :owner, :privacy
 
-  def initialize(owner, public: false)
+  def initialize(owner, privacy)
+    raise ArgumentError.new("privacy is not allowed") unless [PUBLIC, PRIVATE].include? privacy
     @owner = owner
-    @public = public
+    @privacy = privacy
   end
 end
