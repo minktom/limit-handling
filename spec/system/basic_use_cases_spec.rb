@@ -18,7 +18,7 @@ RSpec.describe "Basic use cases:", :type => :system do
 
   context "for a public app" do
     let(:app) { App.new user, App::PUBLIC }
-    let(:custom_limits) { LimitConfig.new 6,75,2000, nil }
+    let(:custom_limits) { LimitConfig.new 6, 75, 2000, nil }
 
     it "set up custom limits" do
       LimitsRepository.store app, custom_limits
