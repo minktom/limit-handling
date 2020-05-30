@@ -15,8 +15,8 @@ class App
 
   def limits
     case privacy
-      when PRIVATE then owner.plan.limits
-      when PUBLIC then LimitsRepository.fetch PUBLIC_APP_DEFAULTS
+      when PRIVATE then PrivateAppLimitRetrievalStrategy.new(self).limits
+      when PUBLIC then PublicAppLimitRetrievalStrategy.new(self).limits
     end
   end
 end
