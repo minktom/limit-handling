@@ -19,6 +19,10 @@ describe Repository do
       expect(repository.fetch :a).to eq 1
       expect(repository.fetch :b).to eq 2
     end
+
+    it "returns nil if stored value not found" do
+      expect(repository.fetch :z).to eq nil
+    end
   end
 
   describe "#delete" do

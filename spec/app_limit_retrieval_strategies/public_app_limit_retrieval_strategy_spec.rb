@@ -5,11 +5,19 @@ describe PublicAppLimitRetrievalStrategy do
   let(:app) { App.new :irrelevant, App::PUBLIC }
 
   describe "#limits" do
-    let(:public_app_default_limits) { instance_double LimitConfig }
+    let(:public_app_default_limits) { LimitConfig.new 2, 45, nil, nil }
 
     it "returns with the public app default limits" do
-      allow(LimitsRepository).to receive(:fetch).with(PUBLIC_APP_DEFAULTS).and_return public_app_default_limits
       expect(strategy.limits).to eq public_app_default_limits
+    end
+
+    context "when app has custom limits" do
+      before { LimitsRepository.store app, custom_limits }
+      let(:custom_limits) { LimitConfig.new 5, 75, 1000, nil }
+
+      it "returns with the custom limits" do
+        expect(strategy.limits).to eq custom_limits
+      end
     end
   end
 end

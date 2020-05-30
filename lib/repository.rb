@@ -8,7 +8,7 @@ class Repository
   end
 
   def fetch(key)
-    @db.fetch key
+    @db.fetch key, nil
   end
 
   def delete(key)
