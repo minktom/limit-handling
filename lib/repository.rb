@@ -12,6 +12,6 @@ class Repository
   end
 
   def delete(key)
-    @db.delete(key)
+    @db.delete key
   end
 end
