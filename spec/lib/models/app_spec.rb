@@ -33,25 +33,4 @@ RSpec.describe App do
       end
     end
   end
-
-  describe "#limits" do
-    subject(:limits) { app.limits }
-    context "when app is private" do
-      let(:privacy) { App::PRIVATE }
-      let(:plan_limits) { LimitsRepository.fetch DEVELOPER_PLAN }
-
-      it "returns with the owners plan limits" do
-        expect(limits).to eq plan_limits
-      end
-    end
-
-    context "when app is public" do
-      let(:privacy) { App::PUBLIC }
-      let(:public_app_default_limits) { LimitsRepository.fetch PUBLIC_APP_DEFAULTS }
-
-      it "returns with the public app default limits" do
-        expect(limits).to eq public_app_default_limits
-      end
-    end
-  end
 end

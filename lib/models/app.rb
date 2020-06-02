@@ -12,11 +12,4 @@ class App
   def convert_to_private!
     @privacy = PRIVATE
   end
-
-  def limits
-    case privacy
-      when PRIVATE then PrivateAppLimitRetrievalStrategy.new(self).limits
-      when PUBLIC then PublicAppLimitRetrievalStrategy.new(self).limits
-    end
-  end
 end
